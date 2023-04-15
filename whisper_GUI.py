@@ -53,20 +53,43 @@ def execute(url):
 # Criar a janela principal
 window = tk.Tk()
 
+# Criar a etiqueta "Youtube URL"
+url_label = tk.Label(window, text="Youtube URL:")
+url_label.grid(row=0, column=0, sticky="w")
+
 # Criar a entrada para a URL
 url_entry = tk.Entry(window)
-url_entry.pack()
+url_entry.grid(row=0, column=1, sticky="we")
+
+# Criar o botão "Executar"
+execute_button = tk.Button(window, text="Executar")
+execute_button.grid(row=0, column=2, sticky="e")
+
+# Criar o botão "Limpar"
+clear_button = tk.Button(window, text="Limpar")
+clear_button.grid(row=0, column=3, sticky="e")
 
 # Função para chamar a função execute() com a URL inserida pelo usuário
-def on_button_click():
+def on_execute_button_click():
     # Obter a URL inserida pelo usuário
     url = url_entry.get()
     # Executar a função execute() com a URL
     execute(url)
 
-# Criar o botão para executar a função execute()
-execute_button = tk.Button(window, text="Executar", command=on_button_click)
-execute_button.pack()
+# Associar a função on_execute_button_click() com o botão "Executar"
+execute_button.config(command=on_execute_button_click)
+
+# Função para limpar a URL inserida pelo usuário
+def on_clear_button_click():
+    # Limpar a entrada da URL
+    url_entry.delete(0, tk.END)
+
+# Associar a função on_clear_button_click() com o botão "Limpar"
+clear_button.config(command=on_clear_button_click)
+
+# Configurar a geometria do grid para permitir que a janela se expanda
+window.grid_columnconfigure(1, weight=1)
+window.grid_rowconfigure(0, weight=1)
 
 # Iniciar a janela principal
 window.mainloop()
